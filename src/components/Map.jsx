@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import GoogleMapsApiLoader from "google-maps-api-loader";
-import createMarker from './createMarker';
+//import createMarker from './createMarker';
+import createClientMarker from './createClientMarker';
+import createWorkerMarker from './createWorkerMarker';
 
 const apiKey = "AIzaSyB2588r2FH65B8M1gJsOe1GyTJ21k3E-QE";
 
@@ -27,7 +29,8 @@ const Map = () => {
     }, [])
     
     if(mapState.loading===false){
-    createMarker(mapState, {lat: 51.4894681, lng: -0.1324313})
+    createClientMarker(mapState, {lat: 51.4894681, lng: -0.1324313})
+    createWorkerMarker(mapState,{lat: 51.5894681, lng: -0.1324313})
     }
 
     return (
