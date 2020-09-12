@@ -41,11 +41,11 @@
   background-color: #e0e0e0;
 }
 .map-overlay {
-  height: calc(100vh - 0px);
+  height: calc(100vh - 36px);
   width: 100%;
 }
 .google-map {
-  height: calc(100vh - 0px); 
+  height: calc(100vh - 36px); 
   width: 100%;
 }
 

@@ -1,5 +1,5 @@
-import hammer from '../hammer.svg'; //need to add credit for SVGs
-import worker from '../worker.svg';
+import hammer from '../resources/hammer.svg'; //need to add credit for SVGs
+import worker from '../resources/worker.svg';
 
 
 const createMarker = (mapState, position, type) => {
