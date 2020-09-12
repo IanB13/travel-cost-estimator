@@ -1,33 +1,41 @@
 import React from 'react';
-import { Checkbox, Form, Button} from 'semantic-ui-react';
+import { Form, Button} from 'semantic-ui-react';
 
 const DistEstimateForm = ({activeMenu}) =>{
 
-if(activeMenu === 'Trip Distance'){
+if(activeMenu === 'Trip Distance' || activeMenu === 'Crow Flies Distance'){
 return(
     <Form>
-    <Form.Field>
-        <label>First Name</label>
-        <input placeholder='First Name' />
+    <Form.Field inline>
+        <label>Flat Rate</label> <br/>
+        Flat rate of £ <input /> per mile
     </Form.Field>
-    <Form.Field>
-        <label>Last Name</label>
-        <input placeholder='Last Name' />
-    </Form.Field>
-    <Form.Field>
-        <Checkbox label='I agree to the Terms and Conditions' />
+    <Form.Field inline>
+        <label>Variable Rate </label> <br/>
+        Flat rate of £ <input /> for first <input /> miles <br/>
+        Then £ <input /> per mile thereafter
     </Form.Field>
     <Button type='submit'>Submit</Button>
     </Form>
 )
 }
 else if(activeMenu === 'Trip Time'){
-    return(<div>trip time</div>)
+return(
+    <Form>
+    <Form.Field inline>
+        <label>Flat Rate</label> <br/>
+        Flat rate of £ <input /> per minute
+    </Form.Field>
+    <Form.Field inline>
+        <label>Variable Rate </label> <br/>
+        Flat rate of £ <input /> for first <input /> minutes <br/>
+        Then £ <input /> per minute thereafter
+    </Form.Field>
+    <Button type='submit'>Submit</Button>
+    </Form>
+)
+}
 
-}
-else if(activeMenu === 'Crow Flies Distance'){
-    return(<div>Crow Flies Distance</div>)
-}
 else{
     return(<div>unknown error</div>)
 }
