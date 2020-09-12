@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Modal, Menu  } from 'semantic-ui-react'
 import DistEstimateForm from "./DistEstimateForm"
 
-const ModalExampleModal = () => {
+const EstimateModal = () => {
     const [open, setOpen] = useState(false)
 
     const [activeMenu, setActiveMenu] = useState('Trip Distance')
@@ -11,6 +11,7 @@ const ModalExampleModal = () => {
         setActiveMenu(name)
     }
 
+    
     return (
         <Modal
             onClose={() => setOpen(false)}
@@ -37,11 +38,11 @@ const ModalExampleModal = () => {
                     />
                 </Menu>
         
-                <DistEstimateForm activeMenu = {activeMenu}/>
+                <DistEstimateForm activeMenu = {activeMenu} setOpen = {setOpen}/>
 
             </Modal.Content>
         </Modal>
     )
 }
 
-export default ModalExampleModal
+export default EstimateModal
