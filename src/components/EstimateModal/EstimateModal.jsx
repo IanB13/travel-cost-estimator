@@ -6,12 +6,13 @@ const EstimateModal = () => {
     const [open, setOpen] = useState(false)
 
     const [activeMenu, setActiveMenu] = useState('Trip Distance')
-
-    const handleItemClick = (e,{name}) => {
+    
+    //changes Active menu
+    const handleMenuClick = (e,{name}) => {
         setActiveMenu(name)
     }
 
-    
+
     return (
         <Modal
             onClose={() => setOpen(false)}
@@ -24,17 +25,17 @@ const EstimateModal = () => {
                     <Menu.Item
                         active = {activeMenu === 'Trip Distance'}
                         name='Trip Distance'
-                        onClick={handleItemClick}
+                        onClick={handleMenuClick}
                     />
                     <Menu.Item
                         active = {activeMenu === 'Trip Time'}
                         name='Trip Time'
-                        onClick={handleItemClick}
+                        onClick={handleMenuClick}
                     />
                     <Menu.Item
                         active = {activeMenu === 'Crow Flies Distance'}
                         name='Crow Flies Distance'
-                        onClick={handleItemClick}
+                        onClick={handleMenuClick}
                     />
                 </Menu>
         
