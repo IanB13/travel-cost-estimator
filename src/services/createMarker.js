@@ -28,7 +28,7 @@ const createMarker = (mapState, position, type) => {
         map: mapState.map, 
         icon
   });
-  console.log(marker)
+
     const clientInfoWindow = new mapState.maps.InfoWindow({
         content
     });
