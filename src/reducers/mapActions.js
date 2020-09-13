@@ -1,7 +1,8 @@
+import markerGenerator from '../services/markerGenerator';
 //initilize map
 import GoogleMapsApiLoader from "google-maps-api-loader";
 const apiKey = "AIzaSyB2588r2FH65B8M1gJsOe1GyTJ21k3E-QE";
-
+//sets location to London,England
 const googleMapsOptions = {
     zoom: 10.06,
     center: {
@@ -23,15 +24,15 @@ export const initMap = (mapRef) =>{
             }
         })
     }
-
 }
 
 
-export const initWorker = () => {
+export const initalizeJobMarkers =(google) =>{
     return  dispatch => {
+        const data = markerGenerator(google)
         dispatch({
-            type: 'INIT_WORKER',
-
+            type: 'INIT_JOBMARKERS',
+            data
         })
     }
 }

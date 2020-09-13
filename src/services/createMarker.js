@@ -8,12 +8,11 @@ const createMarker = (mapState, position, type) => {
     switch(type){
         case 'job':
         iconSVG = hammer;
-        content = `<h1> Client Info </h1> ` +
-        '<div>will have refrence to what type of quote was used</div>'
+        content = '<div> Select an estimate type for travel cost estimates! </div>'
         break;
         case 'builder':
         iconSVG = worker;
-        content = `<h1> Link to changing quote type </h1> `
+        content = `<div> This is the start location for estimates </div> `
         break;
         default: //will throw error for exaustive type checking in ts
     }
@@ -24,20 +23,25 @@ const createMarker = (mapState, position, type) => {
         anchor: new mapState.maps.Point(25/2, 25/2) // anchor
       };
 
-    const clientMarker = new mapState.maps.Marker({
+    const marker = new mapState.maps.Marker({
         position,
         map: mapState.map, 
         icon
   });
-
+  console.log(marker)
     const clientInfoWindow = new mapState.maps.InfoWindow({
         content
     });
 
     //adds listner to allow click to open
-    clientMarker.addListener('click',  () => {
-        clientInfoWindow.open(mapState.map, clientMarker);
+    marker.addListener('click',  () => {
+        clientInfoWindow.open(mapState.map, marker);
     });
+
+    return {
+        marker,
+        position
+    }
 }
 
 export default createMarker

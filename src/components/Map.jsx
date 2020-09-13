@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import markerGenerator from './markerGenerator';
 import { useDispatch,useSelector } from 'react-redux';
-import {initMap} from '../reducers/mapActions'
+import {initMap, initalizeJobMarkers} from '../reducers/mapActions'
 
 
 const Map = () => {
@@ -16,7 +15,7 @@ const Map = () => {
     const google = useSelector(state => state.google)
     
     if(!google.loading){
-        markerGenerator(google)
+        dispatch(initalizeJobMarkers(google))
     }
 
     return (
