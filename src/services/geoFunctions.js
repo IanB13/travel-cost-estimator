@@ -52,7 +52,6 @@ export const routeDirections = async (origin, destination, google) =>{
     }
     
     const directions = await directionServiceRoutePromise(directionRequest)
-    console.log(directions)
     return directions
 }
 
