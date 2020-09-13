@@ -18,7 +18,7 @@ const DistEstimateForm = ({activeMenu,setOpen}) =>{
         event.preventDefault()
         setOpen(false) //closes modal
         dispatch(changeEstimate(estimate))
-        dispatch(addTravel(state.jobs,state.builder)) //TODO: move this
+        dispatch(addTravel(state.jobs,state.builder,state.google)) //TODO: move this, can put on init
     }
 
 

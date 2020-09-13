@@ -1,4 +1,4 @@
-import {haversineDist} from '../services/geoFunctions';
+import {jobTravel} from '../services/jobTravel';
 
 export const changeEstimate = (estimate) => {
     return  dispatch => {
@@ -10,26 +10,18 @@ export const changeEstimate = (estimate) => {
 }
 
 
-export const addTravel = (jobs,builder) =>{
+export const addTravel = (jobs,builder,google) =>{
+    const modifiedJobs = jobTravel(jobs,builder,google)
     //get location of builder
-    const origin = builder.position
+    
 
     //where the calculations come in for each thing
-    const modifiedJobs = jobs.map(job =>{
-        const travel ={
-            dist: "TBD",
-            time: "TBD",
-            crow: haversineDist(origin, job.position)
-        }
-        console.log({...job, travel})
-        return({...job, travel})
-    })
 
-
+    
      return async dispatch =>{
         dispatch({
             type: 'ADD_TRAVEL',
-            data: modifiedJobs
+            data: await modifiedJobs
         })
 
     }
