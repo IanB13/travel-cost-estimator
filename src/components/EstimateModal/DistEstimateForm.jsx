@@ -1,8 +1,9 @@
-import React,{useEffect, useState} from 'react';
+import React,{useState} from 'react';
 import { Form, Button} from 'semantic-ui-react';
-import { useDispatch } from 'react-redux';
-import {changeEstimate} from '../../reducers/actions'
+import { useDispatch,useSelector} from 'react-redux';
+import {changeEstimate,addTravel} from '../../reducers/actions'
 
+//TODO: Finish form controls
 const DistEstimateForm = ({activeMenu,setOpen}) =>{
     const dispatch = useDispatch();
     const [estimate, setEstimate] = useState(null)
@@ -11,16 +12,13 @@ const DistEstimateForm = ({activeMenu,setOpen}) =>{
     const [flatGBPDist, setFlatGBPDist] = useState("")
     const [flatGBPTime, setFlatGBPTime] = useState("")
 
-    //can view when menu changed
-    useEffect(()=>{
-        console.log('menu change')
-    },
-    [activeMenu])
+    const state = useSelector(state => state)
 
     const estimateSubmit = (event) =>{
         event.preventDefault()
         setOpen(false) //closes modal
         dispatch(changeEstimate(estimate))
+        dispatch(addTravel(state.jobs,state.builder)) //TODO: move this
     }
 
 

@@ -1,11 +1,11 @@
 import createMarker from './createMarker';
-import geoFunctions from '../services/geoFunctions';
+import {randLocLondon} from '../services/geoFunctions';
   
 export const jobMarkerGenerator =(mapState)=>{
     //creates 5 random jobs around London
     const markerData = []
     for(let i = 0; i < 5; i++) {
-        const markerDataPoint = createMarker(mapState,geoFunctions.randLocLond(),'job')
+        const markerDataPoint = createMarker(mapState,randLocLondon(),'job')
         markerData.push(markerDataPoint)
     }
 
