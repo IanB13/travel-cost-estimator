@@ -1,4 +1,4 @@
-import markerGenerator from '../services/markerGenerator';
+import {jobMarkerGenerator, builderMarkerGenerator} from '../services/markerGenerator';
 //initilize map
 import GoogleMapsApiLoader from "google-maps-api-loader";
 const apiKey = "AIzaSyB2588r2FH65B8M1gJsOe1GyTJ21k3E-QE";
@@ -11,6 +11,7 @@ const googleMapsOptions = {
     }
 }
 
+//Creates google map
 export const initMap = (mapRef) =>{
     return async dispatch => {
         const google = await GoogleMapsApiLoader({ apiKey })
@@ -26,13 +27,35 @@ export const initMap = (mapRef) =>{
     }
 }
 
-
+// Initilizes Jobs and builder
 export const initalizeJobMarkers =(google) =>{
     return  dispatch => {
-        const data = markerGenerator(google)
+        const data = jobMarkerGenerator(google)
         dispatch({
             type: 'INIT_JOBMARKERS',
             data
         })
     }
 }
+
+export const initalizeBuilderMarker = (google) =>{
+    return  dispatch => {
+        const data = builderMarkerGenerator(google)
+        dispatch({
+            type: 'INIT_BUILDERMARKER',
+            data
+        })
+    }
+}
+
+//for changing 
+export const changeJob = () =>{}
+
+/*     console.log(markerData)
+    mapState.maps.event.clearInstanceListeners(markerData[1].marker);
+    const clientInfoWindow = new mapState.maps.InfoWindow({
+       content: '<h1>IT WORKS! <h1>'
+    });
+    markerData[1].marker.addListener('click',  () => {
+        clientInfoWindow.open(mapState.map,  markerData[1].marker);
+    }); */

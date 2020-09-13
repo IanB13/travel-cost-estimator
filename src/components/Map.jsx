@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {initMap, initalizeJobMarkers} from '../reducers/mapActions'
+import {initMap, initalizeJobMarkers, initalizeBuilderMarker} from '../reducers/mapActions'
 
 
 const Map = () => {
-    //REDUX PART 
     const dispatch = useDispatch();
     const mapRef = useRef()
 
@@ -16,6 +15,7 @@ const Map = () => {
     
     if(!google.loading){
         dispatch(initalizeJobMarkers(google))
+        dispatch(initalizeBuilderMarker(google))
     }
 
     return (

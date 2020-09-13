@@ -1,9 +1,7 @@
 import createMarker from './createMarker';
 import geoFunctions from '../services/geoFunctions';
   
-const markerGenerator =(mapState)=>{
-    //creates builder marker in center of map
-    createMarker(mapState, {lat: 51.4894681, lng: -0.1324313},'builder')
+export const jobMarkerGenerator =(mapState)=>{
     //creates 5 random jobs around London
     const markerData = []
     for(let i = 0; i < 5; i++) {
@@ -22,4 +20,7 @@ const markerGenerator =(mapState)=>{
     return markerData;
 }
 
-export default markerGenerator
+export const builderMarkerGenerator = (mapState) =>{
+    //creates builder marker in center of map
+     return createMarker(mapState, {lat: 51.4894681, lng: -0.1324313},'builder')
+}
