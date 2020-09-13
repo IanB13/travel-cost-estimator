@@ -6,7 +6,6 @@ const markerGenerator =(mapState)=>{
     createMarker(mapState, {lat: 51.4894681, lng: -0.1324313},'builder')
     //creates 5 random jobs around London
     for(let i = 0; i < 5; i++) {
-        console.log(geoFunctions.randLocLond())
         createMarker(mapState,geoFunctions.randLocLond(),'job')
     }
 }

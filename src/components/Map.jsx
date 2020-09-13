@@ -1,32 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
-import GoogleMapsApiLoader from "google-maps-api-loader";
+import React, { useEffect, useRef } from 'react';
 import markerGenerator from './markerGenerator';
+import { useDispatch,useSelector } from 'react-redux';
+import {initMap} from '../reducers/mapActions'
 
-const apiKey = "AIzaSyB2588r2FH65B8M1gJsOe1GyTJ21k3E-QE";
-
-const googleMapsOptions = {
-    zoom: 10.06,
-    center: {
-        lat: 51.4894681,
-        lng:  -0.1324313
-    }
-}
 
 const Map = () => {
-    const [mapState, setMapState] = useState({loading:true})
-    //creates map ref that can then be modified
+    //REDUX PART 
+    const dispatch = useDispatch();
     const mapRef = useRef()
-    useEffect(() => {
-        //loads google maps API 
-        GoogleMapsApiLoader({ apiKey }).then(google => {
-            //creates map ref
-            const map = new google.maps.Map(mapRef.current, googleMapsOptions);
-            setMapState({ maps: google.maps, map, loading: false });
-        });
-    }, [])
+
+    useEffect(()=>{
+        dispatch(initMap(mapRef))
+    },[dispatch]) 
+
+    const google = useSelector(state => state.google)
     
-    if(mapState.loading === false){
-        markerGenerator(mapState)
+    if(!google.loading){
+        markerGenerator(google)
     }
 
     return (
