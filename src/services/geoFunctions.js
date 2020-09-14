@@ -41,7 +41,6 @@ export const routeDirections = async (origin, destination, google) =>{
     const directionServiceRoutePromise = (directions) =>{
         return new Promise((resolve, reject) => {
             directionsService.route((directions),(response, code)=>{
-                console.log("code is",code)
                 if(code === "OK"){
                 resolve(response)
                 } else{
