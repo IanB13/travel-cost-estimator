@@ -22,7 +22,7 @@ const EstimateModal = () => {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button>Select Estimate</Button>}
+            trigger={<Button className = "blue">Select Estimate</Button>}
         >
             <Modal.Content>
                 <Menu tabular>
