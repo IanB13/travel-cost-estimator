@@ -8,7 +8,7 @@ import crow from "../../resources/crow.svg"
 
 const EstimateModal = () => {
     const [open, setOpen] = useState(false)
-
+    const [estimate, setEstimate] = useState(null)
     const [activeMenu, setActiveMenu] = useState('Trip Distance')
     
     //changes Active menu
@@ -55,7 +55,12 @@ const EstimateModal = () => {
 
                 </Menu>
         
-                <DistEstimateForm activeMenu = {activeMenu} setOpen = {setOpen}/>
+                <DistEstimateForm 
+                activeMenu = {activeMenu} 
+                setOpen = {setOpen}
+                estimate = {estimate}
+                setEstimate = {setEstimate}
+                />
 
             </Modal.Content>
         </Modal>
