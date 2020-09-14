@@ -1,4 +1,4 @@
-import {jobMarkerGenerator, builderMarkerGenerator} from '../services/markerGenerator';
+import {jobMarkerGenerator, builderMarkerGenerator} from '../services/marker/generate';
 //initilize map
 import GoogleMapsApiLoader from "google-maps-api-loader";
 const apiKey = process.env.REACT_APP_API_KEY;

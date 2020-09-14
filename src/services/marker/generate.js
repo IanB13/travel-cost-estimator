@@ -1,5 +1,5 @@
-import createMarker from './createMarker';
-import {randLocLondon} from '../services/geoFunctions';
+import createMarker from './create';
+import {randLocLondon} from '../geoFunctions';
   
 export const jobMarkerGenerator =(mapState)=>{
     //creates 5 random jobs around London
