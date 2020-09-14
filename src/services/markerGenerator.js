@@ -8,7 +8,7 @@ export const jobMarkerGenerator =(mapState)=>{
         const markerDataPoint = createMarker(mapState,randLocLondon(),'job')
         markerData.push(markerDataPoint)
     }
-
+//code for deleting and re-writing info window 
 /*     console.log(markerData)
     mapState.maps.event.clearInstanceListeners(markerData[1].marker);
     const clientInfoWindow = new mapState.maps.InfoWindow({

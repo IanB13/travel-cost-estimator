@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { Form, Button} from 'semantic-ui-react';
-import { useDispatch,useSelector} from 'react-redux';
-import {changeEstimate,addTravel} from '../../reducers/actions'
+import { useDispatch} from 'react-redux';
+import {changeEstimate} from '../../reducers/actions'
 
 //TODO: Finish form controls
 const DistEstimateForm = ({activeMenu,setOpen}) =>{
@@ -12,13 +12,10 @@ const DistEstimateForm = ({activeMenu,setOpen}) =>{
     const [flatGBPDist, setFlatGBPDist] = useState("")
     const [flatGBPTime, setFlatGBPTime] = useState("")
 
-    const state = useSelector(state => state)
-
     const estimateSubmit = (event) =>{
         event.preventDefault()
         setOpen(false) //closes modal
         dispatch(changeEstimate(estimate))
-        dispatch(addTravel(state.jobs,state.builder,state.google)) //TODO: move this, can put on init
     }
 
 
