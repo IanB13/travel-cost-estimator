@@ -34,9 +34,7 @@ const Map = () => {
     },[jobs,builder])
 
     useEffect(()=>{
-        console.log('here')
         if(jobs[0]?.travel){
-            console.log('here!')
         updateMarkers(state)
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
