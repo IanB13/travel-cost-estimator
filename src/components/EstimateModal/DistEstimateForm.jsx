@@ -14,6 +14,7 @@ const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
         event.preventDefault()
         getEstimate(estimateTarget)
     }
+
     //TODO: better way of doing this
     useEffect(()=>{
         if(estimate!== null){
@@ -21,16 +22,12 @@ const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
         setOpen(false) //closes modal
         setEstimate(null)
         }
-    
     },[estimate, dispatch, setOpen, setEstimate])
 
-    const changeEstimateTarget = (rateType) =>{
-        setEstimateTarget(rateType)
-    }
 
+    // Set estimate code
     const getEstimate = (rateType) =>{
         const tripType = activeMenu;
-
         switch(tripType){
             case 'Trip Distance':
                 if(rateType === 'flat'){
@@ -118,20 +115,29 @@ const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
 
     //custom hook, has to live here, not pure (side effect)
     //TODO: move into hooks
+    //Probably needs better practices
     const useCheckbox = (rateType) =>{
         const [checked, setChecked] = useState(false)
     
         const onChange = () => {
-     
-
           if(!checked){
-          changeEstimateTarget(rateType)
+            setEstimateTarget(rateType)
+            flatDist[1](false)
+            varDist[1](false) 
+            flatTime[1](false)
+            varTime[1](false)
+            flatCrow[1](false)
+            varCrow[1](false)
           }
           setChecked(!checked)
+          //set all others unchecked? 
+          
         }
         const type = 'checkbox'
-        return { type, checked, onChange}
+        return [{ type, checked, onChange}, setChecked]
     }
+
+
 
     //CheckBox State
     const flatDist = useCheckbox("flat")
@@ -141,25 +147,24 @@ const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
     const flatCrow = useCheckbox("flat")
     const varCrow = useCheckbox("var")
 
-
 if(activeMenu === 'Trip Distance'){
 return(
     <Form>
     <Form.Field inline>
-        <input {...flatDist} />
+        <input {...flatDist[0]} />
         <label>Flat Rate</label> <br/>
         Flat rate of £ 
         <input id = "flatGBPDist" {...flatGBPDist} /> 
         per mile
     </Form.Field>
     <Form.Field inline>
-        <input {...varDist}/>
+        <input {...varDist[0]}/>
         <label>Variable Rate </label> <br/>
         Fixed rate of £ <input id = "fixedGBPDist" {...fixedGBPDist} /> for first 
         <input id = "fixedMilesDist" {...fixedMilesDist} /> miles <br/>
         Then £ <input id = "varGBPDist" {...varGBPDist} /> per mile thereafter
     </Form.Field>
-    <Button onClick = {estimateSubmit}className ="blue" >Submit Estimate</Button>
+    <Button onClick = {estimateSubmit} className ="blue" >Submit Estimate</Button>
     </Form>
 )
 }
@@ -168,14 +173,14 @@ else if(activeMenu === 'Trip Time'){
 return(
     <Form>
     <Form.Field inline>
-        <input {...flatTime}/>
+        <input {...flatTime[0]}/>
         <label>Flat Rate</label> <br/>
         Flat rate of £
         <input id = "flatGBPTime" {...flatGBPTime}/> 
         per minute
     </Form.Field>
     <Form.Field inline>
-        <input {...varTime}/>
+        <input {...varTime[0]}/>
         <label>Variable Rate </label> <br/>
         Fixed rate of £ <input  id = "fixedGBPTime" {...fixedGBPTime}/> for first 
         <input id = "fixedMilesTime" {...fixedMilesTime}/> minutes <br/>
@@ -189,14 +194,14 @@ else if(activeMenu === 'Crow Flies Distance'){
     return(
         <Form>
         <Form.Field inline>
-            <input {...flatCrow}/>
+            <input {...flatCrow[0]}/>
             <label>Flat Rate</label> <br/>
             Flat rate of £ 
             <input id = "flatGBPCrow" {...flatGBPCrow}/> 
             per mile
         </Form.Field>
         <Form.Field inline>
-            <input {...varCrow}/>
+            <input {...varCrow[0]}/>
             <label>Variable Rate </label> <br/>
             Fixed rate of £ <input id = "fixedGBPCrow"  {...fixedGBPCrow}/> for first 
             <input id = "fixedMilesCrow" {...fixedMilesCrow}/> miles <br/>
