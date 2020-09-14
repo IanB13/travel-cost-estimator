@@ -1,22 +1,78 @@
+//helper functions
+const mToMiles = (m) =>{
+    const miles = m/1609.344;
+    return Math.round(miles*10)/10
+}
+
+const roundMoney = (money) =>{
+    return Math.round(money*100)/100
+}
+
+const findMilesVarRate = (travel, varRate) => {
+    const {fixedTravel,fixedCost,rate} = varRate
+
+    if( (travel/1609.344) < +fixedTravel){
+        return(`<div>
+        Estimate is <b>£${fixedCost}</b> for ${mToMiles(travel)} miles
+        which is under ${fixedTravel} miles
+        </div>`)
+    }
+    else if( (travel/1609.344) > +fixedTravel){
+        return(`<div>
+        Estimate is <b>£${roundMoney(+fixedCost + rate * (travel/1609.344 - +fixedTravel))}</b>
+        for ${mToMiles(travel)} miles.
+        £${fixedCost} for the first ${fixedTravel} miles and 
+        £${roundMoney( (rate * (travel/1609.344)-fixedTravel ) )} for the remaining ${mToMiles(travel-fixedTravel*1609.344)} miles
+        </div>`)
+
+    }
+}
+
 //code for deleting and re-writing info window 
 const updateMarkers = ({google,estimate,jobs}) =>{
-/*    switch(estimate.type){
-        default: {
-            
-        }
-   } */
-
-   console.log(jobs)
+    
    for(const job of jobs){
        google.maps.event.clearInstanceListeners(job.marker);
+       // pull into function
+       let content = "error occured, please refresh"
+
+       switch(estimate.tripType){
+        case 'Trip Distance':
+            if(estimate?.flatRate){
+                content = `<div> 
+                estimate is <b>£${ roundMoney(job.travel.dist * estimate.flatRate/1609.34)}</b>
+                for ${mToMiles(job.travel.dist)} miles at £${roundMoney(estimate.flatRate)} per mile
+                </div>`
+            }
+            else if(estimate?.varRate){
+                content = findMilesVarRate(job.travel.dist,estimate.varRate)
+            }
+        break
+        case "Trip Time":
+        break
+        case"Crow Flies Distance":
+        if(estimate?.flatRate){
+            content = `<div> 
+            estimate is <b>£${ roundMoney(job.travel.crow * estimate.flatRate/1609.34)}</b>
+            for ${mToMiles(job.travel.crow)} miles at £${roundMoney(estimate.flatRate)} per mile
+            </div>`
+        }
+        else if(estimate?.varRate){
+            content = findMilesVarRate(job.travel.crow,estimate.varRate)
+        }
+        break
+        default: 
+            console.error("unexpected error")
+        
+   }
        const clientInfoWindow = new google.maps.InfoWindow({
-           content: `<div> crow flies distance is ${job.travel.crow}</div>
-                <div>driving distance is ${job.travel.dist}</div>`
+           content
        });
        job.marker.addListener('click', () => {
            clientInfoWindow.open(google.map, job.marker);
        });
    }
 }
+
 
 export default updateMarkers
