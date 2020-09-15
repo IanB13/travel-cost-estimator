@@ -10,7 +10,8 @@ const googleMapsOptions = {
         lng:  -0.1324313
     },
     streetViewControl: false,
-    fullscreenControl: false
+    fullscreenControl: false,
+    mapTypeControl: false,
 }
 
 //Creates google map

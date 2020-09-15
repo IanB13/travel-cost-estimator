@@ -8,7 +8,7 @@ function InfoModal() {
     <Modal
       closeIcon
       open={open}
-      trigger={<Button id = "infoModalButton"> Info </Button>}
+      trigger={<Button className = "black" id = "infoModalButton"> Info </Button>}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
