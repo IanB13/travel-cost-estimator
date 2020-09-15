@@ -55,9 +55,10 @@ export const initalizeBuilderMarker = (google) =>{
 
 export const updateMarkers = (state) =>{
     return  dispatch => {
-        updateMarker(state)
+        const data = updateMarker(state)
         dispatch({
-            type: 'UPDATE_MARKER'
+            type: 'UPDATE_MARKERS',
+            data
         })
     }
 }

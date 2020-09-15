@@ -6,6 +6,9 @@ const jobsReducer = (state = {loading:true}, action) => {
       case 'ADD_TRAVEL':
         const travelJobs = action.data
         return travelJobs
+      case 'UPDATE_MARKERS':
+        const markerJobs = action.data
+        return markerJobs
       default:
         return state
     }
