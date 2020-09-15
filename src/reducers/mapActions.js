@@ -8,7 +8,9 @@ const googleMapsOptions = {
     center: {
         lat: 51.4894681,
         lng:  -0.1324313
-    }
+    },
+    streetViewControl: false,
+    fullscreenControl: false
 }
 
 //Creates google map

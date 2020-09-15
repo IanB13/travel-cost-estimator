@@ -12,6 +12,6 @@ export const jobMarkerGenerator =(mapState)=>{
 }
 
 export const builderMarkerGenerator = (mapState) =>{
-    //creates builder marker in center of map
-     return createMarker(mapState, {lat: 51.4894681, lng: -0.1324313},'builder')
+    //creates builder marker at HQ
+     return createMarker(mapState, {lat: 51.5242843, lng: -0.1068459},'builder')
 }
