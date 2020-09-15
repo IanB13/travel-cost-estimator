@@ -7,6 +7,12 @@ const mToMiles = (m) =>{
 const roundMoney = (money) =>{
     return Math.round(money*100)/100
 }
+//TODO: Add hours, minute vs minutes, etc.
+const timeString = (s) =>{
+    const minutes = Math.round(s/60)
+    const seconds = s%60
+    return( `${minutes} minutes, ${seconds} seconds`)
+}
 
 const findMilesVarRate = (travel, varRate) => {
     const {fixedTravel,fixedCost,rate} = varRate
@@ -27,6 +33,26 @@ const findMilesVarRate = (travel, varRate) => {
 
     }
 }
+
+const findTimeVarRate = (travel, varRate) => {
+    const {fixedTravel,fixedCost,rate} = varRate
+
+    if( (travel/60) < +fixedTravel){
+        return(`<div>
+        Estimate is <b>£${fixedCost}</b> for ${timeString(travel)} 
+        which is under ${fixedTravel} minutes
+        </div>`)
+    }
+    else if( (travel/60) > +fixedTravel){
+        return(`<div>
+        Estimate is <b>£${roundMoney(+fixedCost + rate * (travel/60 - +fixedTravel))}</b>
+        for ${timeString(travel)}.
+        £${fixedCost} for the first ${fixedTravel} minutes and 
+        £${roundMoney( (rate * (travel/60)-fixedTravel ) )} for the remaining ${timeString(travel-fixedTravel*60)} 
+        </div>`)
+
+    }
+}
 //end helper functions
 
 
@@ -42,7 +68,7 @@ const updateMarkers = ({google,estimate,jobs}) =>{
         
 
        // turn switch case into seperate function
-       let content = "error occured, please refresh"
+       let content = "An error occured, please refresh"
 
        switch(estimate.tripType){
         case 'Trip Distance':
@@ -57,6 +83,15 @@ const updateMarkers = ({google,estimate,jobs}) =>{
             }
         break
         case "Trip Time":
+            if(estimate?.flatRate){
+                content = `<div> 
+                estimate is <b>£${ roundMoney(job.travel.time * (estimate.flatRate/60))}</b>
+                for ${timeString(job.travel.time)} at £${roundMoney(estimate.flatRate)} per minute
+                </div>`
+            }
+            else if(estimate?.varRate){
+                content = findTimeVarRate(job.travel.time,estimate.varRate)
+            }
         break
         case"Crow Flies Distance":
         if(estimate?.flatRate){

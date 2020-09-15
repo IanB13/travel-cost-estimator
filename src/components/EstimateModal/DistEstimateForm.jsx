@@ -75,7 +75,7 @@ const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
             if(rateType === 'flat'){
                 setEstimate({
                     tripType,
-                    flatRate: flatGBPDist.crow
+                    flatRate: flatGBPCrow.value
                 })
             }
             else if(rateType === 'var'){
