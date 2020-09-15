@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {initMap, initalizeJobMarkers, initalizeBuilderMarker, updateMarkers} from '../reducers/mapActions';
+import {initMap, initalizeJobMarkers,
+     initalizeBuilderMarker, updateMarkers,
+     initDirectionsRender} from '../reducers/mapActions';
 import {addTravel} from '../reducers/actions';
 
 const Map = () => {
     const dispatch = useDispatch();
     const mapRef = useRef()
-    const [stop,setStop] = useState(false)
-
+    //stop catch to stop infinite useEffect re-render loop
+    const [googleStop,setGoogleStop] = useState(false)
+    const [jobStop,setJobStop] =useState(false)
+    
+    //initializes map, only happens once
     useEffect(()=>{
         dispatch(initMap(mapRef))
     },[dispatch]) 
@@ -15,18 +20,21 @@ const Map = () => {
     const state = useSelector(state => state)
     const {google,jobs,builder,estimate} = state
 
+    //initalizes markers, happens whenever maps change
     useEffect(()=>{
-    if(!google.loading){
+    if(!google.loading && !googleStop){
+        setGoogleStop(true)
         dispatch(initalizeJobMarkers(google))
         dispatch(initalizeBuilderMarker(google))
+        dispatch(initDirectionsRender(google))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dispatch,google])
 
     useEffect(()=>{
-        //This is some of the jankiest code I have ever written
         //TODO: fix state handling, look into redux-thunk, async handling
-        if(!jobs.loading && !stop){
-        setStop(true)
+        if(!jobs.loading && !jobStop){
+        setJobStop(true)
         dispatch(addTravel(jobs,builder,google)) 
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps

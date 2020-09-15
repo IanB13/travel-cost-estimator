@@ -26,7 +26,22 @@ export const initMap = (mapRef) =>{
             data:{
                 map,
                 maps:google.maps,
-                loading:false
+                loading:false,
+            }
+        })
+    }
+}
+
+//Creates google map
+export const initDirectionsRender = (google) =>{
+    return async dispatch => {
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(google.map);
+        dispatch({
+            type: 'INIT_DIRECTIONS',
+            data:{
+                ...google,
+                directionsRenderer
             }
         })
     }

@@ -3,8 +3,8 @@ import markerContent from './content';
 //code for deleting and re-writing info window 
 const updateMarkers =  ({ google, estimate, jobs }) => {
     //direction services
-    const directionsRenderer = new google.maps.DirectionsRenderer();
-    directionsRenderer.setMap(google.map);
+    //const directionsRenderer = new google.maps.DirectionsRenderer();
+    //directionsRenderer.setMap(google.map);
 
     const updatedJobs = [];
 
@@ -56,7 +56,8 @@ const updateMarkers =  ({ google, estimate, jobs }) => {
                 for(const jobref of updatedJobs){
                     jobref.clientInfoWindow.close()
                 }
-                directionsRenderer.setDirections(job.travel.directions);
+                console.log(google.directionsRenderer)
+                google.directionsRenderer.setDirections(job.travel.directions);
             }
             clientInfoWindow.open(google.map, job.marker);
 
