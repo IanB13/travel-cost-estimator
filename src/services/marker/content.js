@@ -9,7 +9,7 @@ const roundMoney = (money) =>{
 }
 //TODO: Add hours, minute vs minutes, etc.
 const timeString = (s) =>{
-    const minutes = Math.round(s/60)
+    const minutes = Math.floor(s/60)
     const seconds = s%60
     return( `${minutes} minutes, ${seconds} seconds`)
 }
@@ -28,7 +28,7 @@ const findMilesVarRate = (travel, varRate) => {
         Estimate is <b>£${roundMoney(+fixedCost + rate * (travel/1609.344 - +fixedTravel))}</b>
         for ${mToMiles(travel)} miles.
         £${fixedCost} for the first ${fixedTravel} miles and 
-        £${roundMoney( (rate * (travel/1609.344)-fixedTravel ) )} for the remaining ${mToMiles(travel-fixedTravel*1609.344)} miles
+        £${roundMoney( (rate * ((travel/1609.344) - fixedTravel )) )} for the remaining ${mToMiles(travel-fixedTravel*1609.344)} miles
         </div>`)
 
     }
@@ -43,7 +43,7 @@ const findTimeVarRate = (travel, varRate) => {
         which is under ${fixedTravel} minutes
         </div>`)
     }
-//TODO: fix costs, somehow ends up a dollar short
+
     else if( (travel/60) > +fixedTravel){
         return(`<div>
         Estimate is <b>£${roundMoney( +fixedCost + rate * (travel- +fixedTravel*60)/60)}</b>
