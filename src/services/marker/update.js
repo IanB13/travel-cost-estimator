@@ -2,9 +2,6 @@ import markerContent from './content';
 
 //code for deleting and re-writing info window 
 const updateMarkers =  ({ google, estimate, jobs }) => {
-    //direction services
-    //const directionsRenderer = new google.maps.DirectionsRenderer();
-    //directionsRenderer.setMap(google.map);
 
     const updatedJobs = [];
 
@@ -32,7 +29,6 @@ const updateMarkers =  ({ google, estimate, jobs }) => {
 
         updatedJobs.push( {...job,crowFlies,clientInfoWindow})
     }
-    console.log(updatedJobs)
 
     //Second Loop
     //sets event listners
@@ -42,10 +38,8 @@ const updateMarkers =  ({ google, estimate, jobs }) => {
 
         job.marker.addListener('click', () => {
 
-          
-
             if (estimate.tripType === "Crow Flies Distance") {
-                for(const jobref of updatedJobs){
+                for (const jobref of updatedJobs) {
                     jobref.crowFlies.setMap(null)
                     jobref.clientInfoWindow.close()
                 }
@@ -56,7 +50,6 @@ const updateMarkers =  ({ google, estimate, jobs }) => {
                 for(const jobref of updatedJobs){
                     jobref.clientInfoWindow.close()
                 }
-                console.log(google.directionsRenderer)
                 google.directionsRenderer.setDirections(job.travel.directions);
             }
             clientInfoWindow.open(google.map, job.marker);

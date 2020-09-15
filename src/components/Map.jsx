@@ -20,7 +20,7 @@ const Map = () => {
     const state = useSelector(state => state)
     const {google,jobs,builder,estimate} = state
 
-    //initalizes markers, happens whenever maps change
+    //initalizes markers and directions setter
     useEffect(()=>{
     if(!google.loading && !googleStop){
         setGoogleStop(true)
@@ -31,8 +31,9 @@ const Map = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dispatch,google])
 
+    //sets job distances 
     useEffect(()=>{
-        //TODO: fix state handling, look into redux-thunk, async handling
+        //TODO: fix redux store handling, look into redux-thunk, async handling
         if(!jobs.loading && !jobStop){
         setJobStop(true)
         dispatch(addTravel(jobs,builder,google)) 
