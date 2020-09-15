@@ -1,11 +1,21 @@
 //helper functions
 const mToMiles = (m) =>{
     const miles = m/1609.344;
-    return Math.round(miles*10)/10
+    return Math.round(miles*100)/100
 }
 
-const roundMoney = (money) =>{
-    return Math.round(money*100)/100
+const roundMoney = (m) =>{
+    const money = Math.round(m*100)/100
+    const hundredCheck = (money*100)%100
+    const tensCheck = (money*100)%10
+    let moneyStr = money
+    if(!hundredCheck){
+        moneyStr = moneyStr + '.00'
+    }
+    else if(!tensCheck){
+        moneyStr = moneyStr + '0'
+    }
+    return moneyStr
 }
 //TODO: Add hours, minute vs minutes, etc.
 const timeString = (s) =>{
