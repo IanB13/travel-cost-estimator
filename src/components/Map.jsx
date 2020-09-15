@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import {initMap, initalizeJobMarkers,
      initalizeBuilderMarker, updateMarkers,
-     initDirectionsRender} from '../reducers/mapActions';
-import {addTravel} from '../reducers/actions';
+     initDirectionsRender,
+     addTravel} from '../reducers/actions';
 
 const Map = () => {
     const dispatch = useDispatch();
