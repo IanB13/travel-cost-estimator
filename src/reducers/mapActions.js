@@ -1,4 +1,6 @@
 import {jobMarkerGenerator, builderMarkerGenerator} from '../services/marker/generate';
+import updateMarker from '../services/marker/update'
+
 //initilize map
 import GoogleMapsApiLoader from "google-maps-api-loader";
 const apiKey = process.env.REACT_APP_API_KEY;
@@ -51,14 +53,11 @@ export const initalizeBuilderMarker = (google) =>{
     }
 }
 
-//for changing 
-export const changeJob = () =>{}
-
-/*     console.log(markerData)
-    mapState.maps.event.clearInstanceListeners(markerData[1].marker);
-    const clientInfoWindow = new mapState.maps.InfoWindow({
-       content: '<h1>IT WORKS! <h1>'
-    });
-    markerData[1].marker.addListener('click',  () => {
-        clientInfoWindow.open(mapState.map,  markerData[1].marker);
-    }); */
+export const updateMarkers = (state) =>{
+    return  dispatch => {
+        updateMarker(state)
+        dispatch({
+            type: 'UPDATE_MARKER'
+        })
+    }
+}

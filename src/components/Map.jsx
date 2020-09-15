@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {initMap, initalizeJobMarkers, initalizeBuilderMarker} from '../reducers/mapActions';
+import {initMap, initalizeJobMarkers, initalizeBuilderMarker, updateMarkers} from '../reducers/mapActions';
 import {addTravel} from '../reducers/actions';
-import updateMarkers from '../services/marker/update';
 
 const Map = () => {
     const dispatch = useDispatch();
@@ -33,9 +32,10 @@ const Map = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[jobs,builder])
 
+    //updates marker on estimate change
     useEffect(()=>{
         if(jobs[0]?.travel){
-        updateMarkers(state)
+        dispatch(updateMarkers(state))
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[estimate])
