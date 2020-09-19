@@ -7,14 +7,12 @@ import {useField} from '../../hooks'
 
 const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
     const dispatch = useDispatch();
-
     const [estimateTarget, setEstimateTarget] = useState(null)
     //Estimate change dispatch to state
     const estimateSubmit = (event) =>{
         event.preventDefault()
         getEstimate(estimateTarget)
     }
-
     //TODO: better way of doing this
     useEffect(()=>{
         if(estimate!== null){
@@ -23,7 +21,6 @@ const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
         setEstimate(null)
         }
     },[estimate, dispatch, setOpen, setEstimate])
-
 
     // Set code for seting estimate state
     const getEstimate = (rateType) =>{
@@ -152,15 +149,15 @@ return(
         <input {...flatDist.DOM} />
         <label>Flat Rate</label> <br/>
         Flat rate of £ 
-        <input id = "flatGBPDist" {...flatGBPDist} /> 
+        <input  {...flatGBPDist} /> 
         per mile
     </Form.Field>
     <Form.Field inline>
         <input {...varDist.DOM}/>
         <label>Variable Rate </label> <br/>
-        Fixed rate of £ <input id = "fixedGBPDist" {...fixedGBPDist} /> for first 
-        <input id = "fixedMilesDist" {...fixedMilesDist} /> miles <br/>
-        Then £ <input id = "varGBPDist" {...varGBPDist} /> per mile thereafter
+        Fixed rate of £ <input  {...fixedGBPDist} /> for first 
+        <input {...fixedMilesDist} /> miles <br/>
+        Then £ <input  {...varGBPDist} /> per mile thereafter
     </Form.Field>
     <Button onClick = {estimateSubmit} className ="blue" >Submit Estimate</Button>
     </Form>
@@ -174,15 +171,15 @@ return(
         <input {...flatTime.DOM}/>
         <label>Flat Rate</label> <br/>
         Flat rate of £
-        <input id = "flatGBPTime" {...flatGBPTime}/> 
+        <input  {...flatGBPTime}/> 
         per minute
     </Form.Field>
     <Form.Field inline>
         <input {...varTime.DOM}/>
         <label>Variable Rate </label> <br/>
-        Fixed rate of £ <input  id = "fixedGBPTime" {...fixedGBPTime}/> for first 
-        <input id = "fixedMilesTime" {...fixedMilesTime}/> minutes <br/>
-        Then £ <input id = "varGBPTime" {...varGBPTime}/> per minute thereafter
+        Fixed rate of £ <input   {...fixedGBPTime}/> for first 
+        <input  {...fixedMilesTime}/> minutes <br/>
+        Then £ <input  {...varGBPTime}/> per minute thereafter
     </Form.Field>
     <Button onClick = {estimateSubmit}className ="blue" >Submit Estimate</Button>
     </Form>
@@ -195,15 +192,15 @@ else if(activeMenu === 'Crow Flies Distance'){
             <input {...flatCrow.DOM}/>
             <label>Flat Rate</label> <br/>
             Flat rate of £ 
-            <input id = "flatGBPCrow" {...flatGBPCrow}/> 
+            <input  {...flatGBPCrow}/> 
             per mile
         </Form.Field>
         <Form.Field inline>
             <input {...varCrow.DOM}/>
             <label>Variable Rate </label> <br/>
-            Fixed rate of £ <input id = "fixedGBPCrow"  {...fixedGBPCrow}/> for first 
-            <input id = "fixedMilesCrow" {...fixedMilesCrow}/> miles <br/>
-            Then £ <input id = "varGBPCrow" {...varGBPCrow} /> per mile thereafter
+            Fixed rate of £ <input  {...fixedGBPCrow}/> for first 
+            <input {...fixedMilesCrow}/> miles <br/>
+            Then £ <input  {...varGBPCrow} /> per mile thereafter
         </Form.Field>
         <Button onClick = {estimateSubmit} className ="blue" >Submit Estimate</Button>
         </Form>
