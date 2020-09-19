@@ -20,8 +20,8 @@ function InfoModal() {
     >
       <Modal.Content>
         <List as='ol'>
-        <List.Item as='li'>Select an estimate</List.Item>
-        <List.Item as='li'>Select an estimate type then flat or variable rate </List.Item>
+        <List.Item as='li'>Click 'Select Estimate'</List.Item>
+        <List.Item as='li'>Select an estimate type then choose flat or variable rate </List.Item>
         <List.Item as='li'>Click on one of the tool icons
             <Image src = {hammer} alt="tools" inline style = {IconStyle } /> 
             to find the estimated cost of travel from the workshop icon
