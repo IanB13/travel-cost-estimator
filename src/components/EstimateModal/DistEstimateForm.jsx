@@ -4,7 +4,7 @@ import { useDispatch} from 'react-redux';
 import {changeEstimate} from '../../reducers/actions'
 import {useField} from '../../hooks'
 
-//TODO: Finish form controls
+
 const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
     const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
     },[estimate, dispatch, setOpen, setEstimate])
 
 
-    // Set estimate code
+    // Set code for seting estimate state
     const getEstimate = (rateType) =>{
         const tripType = activeMenu;
         switch(tripType){
@@ -113,7 +113,7 @@ const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
     const varGBPTime = useField('number')
     const varGBPCrow = useField('number')
 
-    //custom hook, has to live here, not pure (side effect)
+    //custom hook, has to live here, not pure
     //TODO: move into hooks
     //Probably needs better practices
     const useCheckbox = (rateType) =>{
@@ -122,19 +122,18 @@ const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
         const onChange = () => {
           if(!checked){
             setEstimateTarget(rateType)
-            flatDist[1](false)
-            varDist[1](false) 
-            flatTime[1](false)
-            varTime[1](false)
-            flatCrow[1](false)
-            varCrow[1](false)
+            flatDist.setChecked(false)
+            varDist.setChecked(false) 
+            flatTime.setChecked(false)
+            varTime.setChecked(false)
+            flatCrow.setChecked(false)
+            varCrow.setChecked(false)
           }
           setChecked(!checked)
           //set all others unchecked? 
-          
         }
         const type = 'checkbox'
-        return [{ type, checked, onChange}, setChecked]
+        return { DOM: { type, checked, onChange}, setChecked}
     }
 
 
@@ -151,14 +150,14 @@ if(activeMenu === 'Trip Distance'){
 return(
     <Form>
     <Form.Field inline>
-        <input {...flatDist[0]} />
+        <input {...flatDist.DOM} />
         <label>Flat Rate</label> <br/>
         Flat rate of £ 
         <input id = "flatGBPDist" {...flatGBPDist} /> 
         per mile
     </Form.Field>
     <Form.Field inline>
-        <input {...varDist[0]}/>
+        <input {...varDist.DOM}/>
         <label>Variable Rate </label> <br/>
         Fixed rate of £ <input id = "fixedGBPDist" {...fixedGBPDist} /> for first 
         <input id = "fixedMilesDist" {...fixedMilesDist} /> miles <br/>
@@ -173,14 +172,14 @@ else if(activeMenu === 'Trip Time'){
 return(
     <Form>
     <Form.Field inline>
-        <input {...flatTime[0]}/>
+        <input {...flatTime.DOM}/>
         <label>Flat Rate</label> <br/>
         Flat rate of £
         <input id = "flatGBPTime" {...flatGBPTime}/> 
         per minute
     </Form.Field>
     <Form.Field inline>
-        <input {...varTime[0]}/>
+        <input {...varTime.DOM}/>
         <label>Variable Rate </label> <br/>
         Fixed rate of £ <input  id = "fixedGBPTime" {...fixedGBPTime}/> for first 
         <input id = "fixedMilesTime" {...fixedMilesTime}/> minutes <br/>
@@ -194,14 +193,14 @@ else if(activeMenu === 'Crow Flies Distance'){
     return(
         <Form>
         <Form.Field inline>
-            <input {...flatCrow[0]}/>
+            <input {...flatCrow.DOM}/>
             <label>Flat Rate</label> <br/>
             Flat rate of £ 
             <input id = "flatGBPCrow" {...flatGBPCrow}/> 
             per mile
         </Form.Field>
         <Form.Field inline>
-            <input {...varCrow[0]}/>
+            <input {...varCrow.DOM}/>
             <label>Variable Rate </label> <br/>
             Fixed rate of £ <input id = "fixedGBPCrow"  {...fixedGBPCrow}/> for first 
             <input id = "fixedMilesCrow" {...fixedMilesCrow}/> miles <br/>
