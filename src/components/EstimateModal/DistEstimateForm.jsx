@@ -130,7 +130,6 @@ const DistEstimateForm = ({activeMenu,setOpen, estimate,setEstimate}) =>{
             varCrow.setChecked(false)
           }
           setChecked(!checked)
-          //set all others unchecked? 
         }
         const type = 'checkbox'
         return { DOM: { type, checked, onChange}, setChecked}
