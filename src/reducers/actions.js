@@ -1,6 +1,7 @@
 import {jobTravel} from '../services/jobTravel';
 import {jobMarkerGenerator, builderMarkerGenerator} from '../services/marker/generate';
 import updateMarker from '../services/marker/update'
+import {store} from './store'
 
 //initilize map
 import GoogleMapsApiLoader from "google-maps-api-loader";
@@ -101,3 +102,14 @@ export const addTravel = (jobs,builder,google) =>{
     }
 
 }
+
+//TODO: reduce into single dispatch
+export const googleFinishedLoading  = (mapRef) => async (dispatch) =>{
+    await dispatch(initMap(mapRef))
+    const initGoogle = store.getState().google
+    await dispatch(initalizeJobMarkers(initGoogle))
+    await dispatch(initalizeBuilderMarker(initGoogle))
+    await dispatch(initDirectionsRender(initGoogle))
+    const {google,jobs,builder} = store.getState()
+    await dispatch(addTravel(jobs,builder,google)) 
+  }
